@@ -5,6 +5,55 @@ var timeBlockContainer = document.querySelector(".container");
 // Set current Day, Month and ordinal Date in "currentDay" <p>
 todaysDateContainer.textContent = moment().format("dddd, MMMM Do");
 
+//Event Delegate for timeBlockContainer
+timeBlockContainer.onclick = function(event) {
+    var saveButton = event.target;
+
+        if (saveButton.classList.contains("saveBtn")) {
+            var myParentElement = saveButton.parentElement;
+            var myTime = myParentElement.childNodes[0].textContent;
+            var myInput = myParentElement.childNodes[1].value;
+            console.log(myTime);
+            console.log(myInput);
+            submitTimeBlockEntry(myTime, myInput);
+    }
+}
+
+// Verify localstorage
+function doesLocalStorageExist(){
+    if(localStorage.getItem("mySchedule") !== null){
+        return true;
+    } else {
+        return false;
+    }
+}
+
+// Add TimeBlock to localStorage
+function submitTimeBlockEntry(myTime, myText){
+    var myTimeBlockObj = {
+        timeSlot: myTime,
+        scheduleNote: myText
+    }
+    var myTempTimeBlocks = [];
+    console.log(doesLocalStorageExist());
+    if(doesLocalStorageExist()){
+        var existingSchedule = JSON.parse(localStorage.getItem("mySchedule"));
+
+        for(var i = 0; i < existingSchedule.length; i++){
+            myTempTimeBlocks.push(existingSchedule[i]);
+        }
+        
+        myTempTimeBlocks.push(myTimeBlockObj);
+
+        localStorage.setItem("mySchedule", JSON.stringify(myTempTimeBlocks));
+
+    } else {
+
+        myTempTimeBlocks.push(myTimeBlockObj);
+        localStorage.setItem("mySchedule", JSON.stringify(myTempTimeBlocks));
+    }
+}
+
 // Returns a bootstrap element that takes in text and has a button to save inputted text to 
 function createMyTimeBlocks(time){
     var myBSElement = document.createElement("div");
@@ -36,6 +85,28 @@ function createMyTimeBlocks(time){
     return myBSElement;
 }
 
+// Find my time slot
+function returnMyTimeBlock(myTime){
+    var myBlocks = document.querySelectorAll(".time-block");
+    for(var i = 0; i < myBlocks.length; i++){
+        if(myBlocks[i].childNodes[0].textContent === myTime){
+            return myBlocks[i];
+        }
+    }
+}
+
+
+// Populate Schedule with existing entries
+function populateTimeBlocks(){
+    if(doesLocalStorageExist()){
+        var existingSchedule = JSON.parse(localStorage.getItem("mySchedule"));
+        for(var i = 0; i < existingSchedule.length; i++){
+            var timeBlock = returnMyTimeBlock(existingSchedule[i].timeSlot);
+            timeBlock.childNodes[1].value = existingSchedule[i].scheduleNote;
+        }
+    }
+}
+
 // Assign correct styling to time blocks
 function updateTimeBlockColors(){
     var myTimeBlocks = document.querySelectorAll(".time-block");
@@ -59,6 +130,7 @@ function createMyScheduleLayout(){
         timeBlockContainer.appendChild(createMyTimeBlocks(moment({hour: MyTimeModifier}).format("h A")));
     }
     updateTimeBlockColors();
+    populateTimeBlocks();
 }
 
 createMyScheduleLayout();
