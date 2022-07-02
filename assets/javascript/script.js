@@ -13,7 +13,7 @@ function createMyTimeBlocks(time){
     var mySaveButton = document.createElement("button");
 
     //Assign relevant properties to the Div
-    myBSElement.setAttribute("class", "input-group mb-3");
+    myBSElement.setAttribute("class", "input-group mb-3 time-block");
 
     //Assign time to paragraph tag
     myTimeElement.setAttribute("class", "hour");
@@ -36,12 +36,29 @@ function createMyTimeBlocks(time){
     return myBSElement;
 }
 
+// Assign correct styling to time blocks
+function updateTimeBlockColors(){
+    var myTimeBlocks = document.querySelectorAll(".time-block");
+    var myCurrentTime;
+    for(var i = 0; i < myTimeBlocks.length; i++){
+        if(myTimeBlocks[i].childNodes[0].textContent === moment().format("h A")){
+            myCurrentTime = myTimeBlocks[i].childNodes[0].textContent;
+            myTimeBlocks[i].childNodes[1].classList.add("present");
+        } else if (moment(myCurrentTime).isAfter(moment().format("h"))){
+            myTimeBlocks[i].childNodes[1].classList.add("past");
+        } else {
+            myTimeBlocks[i].childNodes[1].classList.add("future");
+        }
+    }
+}
+
 // createMySchedule Function - populates the timeBlockContainer with timeblocks
 function createMyScheduleLayout(){
     for(var i = 0; i < 9; i++) {
         var MyTimeModifier = i+9;
         timeBlockContainer.appendChild(createMyTimeBlocks(moment({hour: MyTimeModifier}).format("h A")));
     }
+    updateTimeBlockColors();
 }
 
 createMyScheduleLayout();
