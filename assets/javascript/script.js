@@ -1,21 +1,59 @@
 // Variable Declarations
 var todaysDateContainer = document.querySelector("#currentDay");
 var timeBlockContainer = document.querySelector(".container");
+var saveSound = document.querySelector("#save");
+var errorSound = document.querySelector("#error");
 
 // Set current Day, Month and ordinal Date in "currentDay" <p>
 todaysDateContainer.textContent = moment().format("dddd, MMMM Do");
+
+function playSound(soundType){
+    soundType.play();
+}
+
+function stopAnimation(myAnimClass, element, duration){
+    var secondsLeft = 2;
+    // Sets interval in variable
+    var timerInterval = setInterval(function() {
+        secondsLeft--;
+    
+        if(secondsLeft === 0) {
+          // Stops execution of action at set interval
+          clearInterval(timerInterval);
+          element.childNodes[0].classList.remove(myAnimClass);
+        }
+    
+      }, duration);
+      return;
+}
+
+function playErrorAnim(button){
+    button.childNodes[0].classList.add("playErrorAnim");
+    stopAnimation("playErrorAnim", button, 250);
+}
+
+
+function playSaveAnim(button){
+    button.childNodes[0].classList.add("playSaveAnim");
+    stopAnimation("playSaveAnim", button, 500);
+}
 
 //Event Delegate for timeBlockContainer
 timeBlockContainer.onclick = function(event) {
     var saveButton = event.target;
 
-        if (saveButton.classList.contains("saveBtn")) {
-            var myParentElement = saveButton.parentElement;
-            var myTime = myParentElement.childNodes[0].textContent;
-            var myInput = myParentElement.childNodes[1].value;
-            console.log(myTime);
-            console.log(myInput);
-            submitTimeBlockEntry(myTime, myInput);
+    if (saveButton.classList.contains("saveBtn")) {
+        var myParentElement = saveButton.parentElement;
+        var myTime = myParentElement.childNodes[0].textContent;
+        var myInput = myParentElement.childNodes[1].value;
+            if(myInput === ""){
+                playSound(errorSound);
+                playErrorAnim(saveButton);
+            } else {
+                playSound(saveSound);
+                playSaveAnim(saveButton);
+                submitTimeBlockEntry(myTime, myInput);
+            }
     }
 }
 
@@ -35,7 +73,6 @@ function submitTimeBlockEntry(myTime, myText){
         scheduleNote: myText
     }
     var myTempTimeBlocks = [];
-    console.log(doesLocalStorageExist());
     if(doesLocalStorageExist()){
         var existingSchedule = JSON.parse(localStorage.getItem("mySchedule"));
 
@@ -71,7 +108,7 @@ function createMyTimeBlocks(time){
 
     //Assign relevant properties to the Input and append to div
     myInputElement.setAttribute("type", "text");
-    myInputElement.setAttribute("class", "form-control row");
+    myInputElement.setAttribute("class", "textarea form-control row description");
     myBSElement.appendChild(myInputElement);
 
     //Assign relevant properties to the Save Button and append to div
@@ -107,15 +144,36 @@ function populateTimeBlocks(){
     }
 }
 
+// Return the earlier time
+function IsCurrentTimeInThePast(CurrentTime, CompareTime){
+    var myTimeArray = [9, 10, 11, 12, 1, 2, 3, 4, 5];
+    var firstTime = 0;
+    var secondTime = 0;
+
+    for (var i = 0; i < myTimeArray.length; i++){
+        if(myTimeArray[i] == CurrentTime.substring(0,2)){
+            firstTime = i;
+        } else if (myTimeArray[i] == CompareTime.substring(0,2)){
+            secondTime = i;
+        }
+    }
+
+    if(firstTime > secondTime){
+        return true;
+    } else {
+        return false;
+    }
+}
+
 // Assign correct styling to time blocks
 function updateTimeBlockColors(){
+    var myTimeToCompare = moment().format("h A");
     var myTimeBlocks = document.querySelectorAll(".time-block");
-    var myCurrentTime;
+
     for(var i = 0; i < myTimeBlocks.length; i++){
-        if(myTimeBlocks[i].childNodes[0].textContent === moment().format("h A")){
-            myCurrentTime = myTimeBlocks[i].childNodes[0].textContent;
+        if(myTimeBlocks[i].childNodes[0].textContent === myTimeToCompare){
             myTimeBlocks[i].childNodes[1].classList.add("present");
-        } else if (moment(myCurrentTime).isAfter(moment().format("h"))){
+        } else if (IsCurrentTimeInThePast(myTimeToCompare, myTimeBlocks[i].childNodes[0].textContent)){
             myTimeBlocks[i].childNodes[1].classList.add("past");
         } else {
             myTimeBlocks[i].childNodes[1].classList.add("future");

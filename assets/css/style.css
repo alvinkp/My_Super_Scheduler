@@ -8,11 +8,23 @@ img{
   pointer-events: none;
 }
 
+.playSaveAnim{
+  animation-name: saveAnim;
+  animation-iteration-count: 1;
+  animation-duration: .5s;
+}
+
+.playErrorAnim{
+  animation-name: saveError;
+  animation-iteration-count: 1;
+  animation-duration: .25s;
+}
+
 textarea {
   background: transparent;
   border: none;
   resize: none;
-  color: #000000;
+  color: black;
   border-left: 1px solid black;
   padding: 10px;
 }
@@ -27,6 +39,8 @@ textarea {
 
 .description {
   white-space: pre-wrap;
+  font-family:'Open Sans','Courier New', Courier, monospace;
+  font-size: 20px;
 }
 
 .time-block {
@@ -51,17 +65,17 @@ textarea {
 }
 
 .past {
-  background-color: #d3d3d3;
+  background-color: #7c7c7c;
   color: white;
 }
 
 .present {
-  background-color: #ff6961;
+  background-color: #df4b43;
   color: white;
 }
 
 .future {
-  background-color: #77dd77;
+  background-color: #2ca92c;
   color: white;
 }
 
@@ -76,4 +90,19 @@ textarea {
 .saveBtn i:hover {
   font-size: 20px;
   transition: all 0.3s ease-in-out;
+}
+
+@keyframes saveAnim {
+  0%   {transform: scale(1);}
+  50%  {transform: scale(.25);}
+  75%  {transform: scale(1.1);}
+  100% {transform: scale(1);}
+}
+
+@keyframes saveError {
+  0%{transform: translateX(5px);}
+  25%{transform: translateX(-5px);}
+  50%{transform: translateX(5px);}
+  75%{transform: translateX(-5px);}
+  100%{transform: translateX(5px);}
 }
