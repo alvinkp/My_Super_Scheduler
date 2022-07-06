@@ -4,17 +4,17 @@ body {
   line-height: 1;
 }
 
-img{
+img {
   pointer-events: none;
 }
 
-.playSaveAnim{
+.playSaveAnim {
   animation-name: saveAnim;
   animation-iteration-count: 1;
   animation-duration: .5s;
 }
 
-.playErrorAnim{
+.playErrorAnim {
   animation-name: saveError;
   animation-iteration-count: 1;
   animation-duration: .25s;

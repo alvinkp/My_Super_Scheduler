@@ -1,16 +1,16 @@
-# <span style="color:#EF476F">My_Super_Scheduler</span>
+# <span style="color:#FFD23F">My_Super_Scheduler</span>
 
 This was the fifth challenge assignment for our UPENN Bootcamp. We were tasked with editing an existing codebase to use moment.js and allow the user to plan their day with the tools we provide. (See **User Story** and **Acceptable Criteria** sections below).
 
 ---
 
-## 📕 <span style="color:#FFD166">User Story</span> 
+## 📕 <span style="color:#FFD23F">User Story</span> 
 
 AS AN employee with a busy schedule I WANT to add important events to a daily planner SO THAT I can manage my time effectively
 
 ---
 
-## ✔️ <span style="color:#FFD166">Acceptable Criteria</span> 
+## ✔️ <span style="color:#FFD23F">Acceptable Criteria</span> 
 
 - GIVEN I am using a daily planner to create a schedule
 - WHEN I open the planner THEN the current day is displayed at the top of the calendar
@@ -22,20 +22,25 @@ AS AN employee with a busy schedule I WANT to add important events to a daily pl
 
 ---
 
-## 🔧 <span style="color:#FFD166">Optimizations</span> 
+## 🔧 <span style="color:#FFD23F">Optimizations</span> 
 
-### <span style="color:#06D6A0">HTML</span>
+### <span style="color:#EE4266">HTML</span>
+- Added reset.css
+- Added audio elements (save_sound.mp3 and save_error.mp3)
+- Added script.js script element
 
+### <span style="color:#EE4266">CSS</span>
+- Added animation classes (saveAnim and saveError)
+- Added img class to remove blocking of button click events
 
-### <span style="color:#06D6A0">CSS</span>
-
-
-### <span style="color:#06D6A0">Javascript</span>
-
+### <span style="color:#EE4266">Javascript</span>
+- Added functionality for adding timeblocks to HTML
+- Added functionality for assigning colors to represent past, present and future timeblocks
+- Added functionality for animations and sounds to play on button click.
 
 ---
 
-## 📷 <span style="color:#FFD166">Screenshots</span> 
+## 📷 <span style="color:#FFD23F">Screenshots</span> 
 
 ![Completed Challenge03 Functionality Example 1](./assets/images/Challenge04_shot01.PNG)
 ![Completed Challenge03 Functionality Example 2](./assets/images/Challenge04_shot02.PNG)
@@ -44,9 +49,10 @@ AS AN employee with a busy schedule I WANT to add important events to a daily pl
 ![Completed Challenge03 Functionality Example 5](./assets/images/Challenge04_shot05.PNG)
 ![Completed Challenge03 Functionality Example 6](./assets/images/Challenge04_shot06.PNG)
 ![Completed Challenge03 Functionality Example 7](./assets/images/Challenge04_shot07.PNG)
+
 ---
 
-## 🎯 <span style="color:#FFD166">Deployment</span>
+## 🎯 <span style="color:#FFD23F">Deployment</span>
 
 Website: https://alvinkp.github.io/My_Super_Scheduler/
 
@@ -54,7 +60,7 @@ Repository: https://github.com/alvinkp/My_Super_Scheduler
 
 ---
 
-## ✉️ <span style="color:#FFD166">Authors</span> 
+## ✉️ <span style="color:#FFD23F">Authors</span> 
 
 - [@alvinkp](https://www.github.com/alvinkp)
 
