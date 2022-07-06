@@ -49,6 +49,7 @@ timeBlockContainer.onclick = function(event) {
             if(myInput === ""){
                 playSound(errorSound);
                 playErrorAnim(saveButton);
+                submitTimeBlockEntry(myTime, myInput);
             } else {
                 playSound(saveSound);
                 playSaveAnim(saveButton);
