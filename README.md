@@ -42,13 +42,8 @@ AS AN employee with a busy schedule I WANT to add important events to a daily pl
 
 ## 📷 <span style="color:#FFD23F">Screenshots</span> 
 
-![Completed Challenge03 Functionality Example 1](./assets/images/Challenge04_shot01.PNG)
-![Completed Challenge03 Functionality Example 2](./assets/images/Challenge04_shot02.PNG)
-![Completed Challenge03 Functionality Example 3](./assets/images/Challenge04_shot03.PNG)
-![Completed Challenge03 Functionality Example 4](./assets/images/Challenge04_shot04.PNG)
-![Completed Challenge03 Functionality Example 5](./assets/images/Challenge04_shot05.PNG)
-![Completed Challenge03 Functionality Example 6](./assets/images/Challenge04_shot06.PNG)
-![Completed Challenge03 Functionality Example 7](./assets/images/Challenge04_shot07.PNG)
+![Completed Challenge03 Functionality Example 1](./assets/images/Challenge05_shot01.PNG)
+![Completed Challenge03 Functionality Example 2](./assets/images/Challenge05_shot02.PNG)
 
 ---
 
